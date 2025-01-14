@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/app_router/routes.dart';
 import '../../../../core/constants.dart';
 import '../../../core/styles/text_styles.dart';
+import '../../core/styles/app_colors.dart';
 import '../../generated/assets.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -22,18 +23,16 @@ class _SplashScreenState extends State<SplashScreen>
     initNavigateToHomeView();
   }
 
-
   void initNavigateToHomeView() {
     Future.delayed(const Duration(seconds: 3), () async {
+
       if (await checkIsFirstTime()) {
         GoRouter.of(context).go(AppRouter.onBoardingScreen);
       } else {
-        if(isLoggedIn)
-          {
-            GoRouter.of(context).go(AppRouter.appLayout);
-          }
-        else{
-           GoRouter.of(context).go(AppRouter.loginScreen);
+        if (isLoggedIn) {
+          GoRouter.of(context).go(AppRouter.appLayout);
+        } else {
+          GoRouter.of(context).go(AppRouter.loginScreen);
         }
       }
     });
@@ -47,9 +46,13 @@ class _SplashScreenState extends State<SplashScreen>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
-              child: Center(child: Padding(
+              child: Center(
+                  child: Padding(
                 padding: const EdgeInsets.all(18.0),
-                child: Image.asset(Assets.logoLogo),
+                child: SizedBox(
+                    height: 200.h,
+                    width: 200.h,
+                    child: Image.asset(Assets.logoLogo)),
               )),
             ),
             Column(
@@ -58,10 +61,16 @@ class _SplashScreenState extends State<SplashScreen>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'Developed By Attia Fouad',
-                      style: MyTextStyles.textStyle16Bold,
-                    ),
+                    RichText(
+                        text: TextSpan(children: [
+                      TextSpan(
+                          text: 'Developed By ',
+                          style: MyTextStyles.textStyle16Bold),
+                      TextSpan(
+                          text: 'Attia Fouad',
+                          style: MyTextStyles.textStyle16Bold
+                              .copyWith(color: AppColors.greyTextColor)),
+                    ])),
                   ],
                 ),
                 SizedBox(

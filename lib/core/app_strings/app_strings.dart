@@ -1,7 +1,14 @@
 abstract class AppStrings {
+
+  static const firstOnboardingTitle = 'Get things done with Task Manager.';
+  static const firstOnboardingDescription = 'Organize your tasks, stay on track, and achieve more every day!';
   static const getStarted = 'Get Started';
-  static const firstOnboardingTitle = 'Achieve your goals.';
-  static const firstOnboardingDescription = 'Get things done with your task manager app';
+  static const welcomeBack = 'Welcome Back!';
+  static const login = 'Login';
+  static const userName = 'User Name';
+  static const password = 'Password';
+  static const pleaseEnterYourPassword = 'Please Enter Your Password';
+  static const pleaseEnterYourUserName = 'Please Enter Your User Name';
   // request messages
   static const connectionTimeOut = 'Connection Time Out';
   static const sendTimeOut = 'Send Time Out';

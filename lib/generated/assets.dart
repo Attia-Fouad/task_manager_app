@@ -7,5 +7,8 @@ class Assets {
   static const String fontsPoppinsMedium = 'assets/fonts/Poppins-Medium.ttf';
   static const String fontsPoppinsRegular = 'assets/fonts/Poppins-Regular.ttf';
   static const String logoLogo = 'assets/logo/logo.png';
+  static const String svgsCheckListSvg = 'assets/svgs/check_list_svg.svg';
+  static const String svgsEmptyListSvg = 'assets/svgs/empty_list_svg.svg';
+  static const String svgsOnBoarding = 'assets/svgs/on_boarding.svg';
 
 }

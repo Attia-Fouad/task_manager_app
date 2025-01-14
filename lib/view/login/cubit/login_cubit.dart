@@ -14,9 +14,6 @@ class LoginCubit extends Cubit<LoginState> {
 
   var formKey = GlobalKey<FormState>();
 
-  TextEditingController uerController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-
   IconData suffix = Icons.visibility_outlined;
   bool isPassword = true;
 

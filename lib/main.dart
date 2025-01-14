@@ -1,3 +1,5 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,7 +27,14 @@ Future<void> main() async {
   Bloc.observer = MyBlocObserver();
   // Use Future.wait to wait for all the futures to complete
   await Future.wait(futures);
-  runApp(const MyApp());
+  runApp(
+
+
+      DevicePreview(
+        enabled: !kReleaseMode,
+        builder: (context) => const MyApp(), // Wrap your app
+      ),
+      );
 }
 
 class MyApp extends StatelessWidget {
