@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../tasks/tasks_screen.dart';
 import 'cubit/app_cubit.dart';
 
 class AppLayoutScreen extends StatefulWidget {
@@ -23,13 +24,7 @@ class _AppLayoutScreenState extends State<AppLayoutScreen> {
       },
       builder: (context, state) {
         return Scaffold(
-          body: Center(
-            child: SizedBox(child: ElevatedButton(
-              onPressed: (){
-                cubit.getRemoteUserData();
-              },
-                child: Text('app layout')),),
-          ), /*Stack(
+          body: TasksScreen(), /*Stack(
             alignment: AlignmentDirectional.bottomCenter,
             children: [
               LazyLoadIndexedStack(

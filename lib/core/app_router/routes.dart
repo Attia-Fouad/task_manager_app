@@ -5,15 +5,15 @@ import '../../view/app_layout/app_layout.dart';
 import '../../view/login/login_screen.dart';
 import '../../view/onboarding/onboarding_screen.dart';
 import '../../view/splash/splash_screen.dart';
+import '../../view/tasks/tasks_screen.dart';
 import 'animation_type.dart';
 
-
 abstract class AppRouter {
-  //Start
   static const splashScreen = '/';
   static const onBoardingScreen = '/onBoardingScreen';
   static const appLayout = '/appLayout';
   static const loginScreen = '/loginScreen';
+  static const tasksScreen = '/tasksScreen';
 
   static final router = GoRouter(
     routes: [
@@ -55,6 +55,16 @@ abstract class AppRouter {
           context: context,
           state: state,
           child: const LoginScreen(),
+          animationType: AnimationType.fadeTransitionAnimation,
+        ),
+      ),
+      //TasksScreen
+      GoRoute(
+        path: tasksScreen,
+        pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
+          context: context,
+          state: state,
+          child: const TasksScreen(),
           animationType: AnimationType.fadeTransitionAnimation,
         ),
       ),

@@ -10,5 +10,6 @@ class Assets {
   static const String svgsCheckListSvg = 'assets/svgs/check_list_svg.svg';
   static const String svgsEmptyListSvg = 'assets/svgs/empty_list_svg.svg';
   static const String svgsOnBoarding = 'assets/svgs/on_boarding.svg';
+  static const String svgsTrash = 'assets/svgs/trash.svg';
 
 }

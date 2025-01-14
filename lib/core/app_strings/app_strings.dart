@@ -7,8 +7,11 @@ abstract class AppStrings {
   static const login = 'Login';
   static const userName = 'User Name';
   static const password = 'Password';
+  static const showMore = ' Show More';
+  static const showLess = ' Show Less';
   static const pleaseEnterYourPassword = 'Please Enter Your Password';
   static const pleaseEnterYourUserName = 'Please Enter Your User Name';
+  static const dontHaveToDoYet = "You don't have a to do list yet!";
   // request messages
   static const connectionTimeOut = 'Connection Time Out';
   static const sendTimeOut = 'Send Time Out';

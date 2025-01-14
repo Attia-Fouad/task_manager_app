@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:task_manager_app/view/tasks/cubit/tasks_cubit.dart';
 
 import '../../repositories/auth_repo/auth_repo.dart';
 import '../../repositories/auth_repo/auth_repo_impl.dart';
@@ -15,6 +16,9 @@ class ServicesLocator {
     sl.registerFactory(() => AppCubit(authRepo: sl<AuthRepo>()));
     sl.registerFactory(() => LoginCubit(
           authRepo: sl<AuthRepo>(),
+        ));
+    sl.registerFactory(() => TasksCubit(
+          remoteTasksRepo: sl<RemoteTasksRepo>(),
         ));
 
     //Repository
