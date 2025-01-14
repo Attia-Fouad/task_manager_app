@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../repositories/auth_repo/auth_repo.dart';
+
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
@@ -13,8 +14,8 @@ class LoginCubit extends Cubit<LoginState> {
 
   var formKey = GlobalKey<FormState>();
 
-  var signInEmailController = TextEditingController();
-  var signInPasswordController = TextEditingController();
+  TextEditingController uerController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   IconData suffix = Icons.visibility_outlined;
   bool isPassword = true;
@@ -26,27 +27,19 @@ class LoginCubit extends Cubit<LoginState> {
     emit(ChangeVisibilityState());
   }
 
-  // login(
-  //     {LoginType? loginType,
-  //     required String email,
-  //     required String password}) async {
-  //   emit(LoginLoadingState());
-  //   var result = await authRepo.login(
-  //     email: email,
-  //     password: password,
-  //   );
-  //   result.fold(
-  //     (failure) {
-  //       emit(LoginFailureState(message: failure.message));
-  //     },
-  //     (data) {
-  //       emit(LoginSuccessState(
-  //         data: data,
-  //           loginType: loginType,user: user
-  //       ));
-  //     },
-  //   );
-  // }
-
-
+  login({required String username, required String password}) async {
+    emit(LoginLoadingState());
+    var result = await authRepo.login(
+      username: username,
+      password: password,
+    );
+    result.fold(
+      (failure) {
+        emit(LoginFailureState(message: failure.message));
+      },
+      (data) {
+        emit(LoginSuccessState());
+      },
+    );
+  }
 }
