@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager_app/view/reusable_widgets/default_loading_widget.dart';
 
 import '../../core/styles/app_colors.dart';
 import '../../core/styles/text_styles.dart';
@@ -40,7 +41,7 @@ class DefaultButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return loadingController
-        ? const Center(child: CircularProgressIndicator())
+        ? const DefaultLoadingWidget()
         : Center(
             child: Material(
               elevation: elevation ?? 0.0, // Applying elevation

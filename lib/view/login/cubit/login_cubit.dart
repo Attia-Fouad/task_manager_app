@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../models/user_data_model.dart';
 import '../../../repositories/auth_repo/auth_repo.dart';
 
 part 'login_state.dart';
@@ -13,6 +14,9 @@ class LoginCubit extends Cubit<LoginState> {
   static LoginCubit get(context) => BlocProvider.of(context);
 
   var formKey = GlobalKey<FormState>();
+
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   IconData suffix = Icons.visibility_outlined;
   bool isPassword = true;
@@ -35,7 +39,7 @@ class LoginCubit extends Cubit<LoginState> {
         emit(LoginFailureState(message: failure.message));
       },
       (data) {
-        emit(LoginSuccessState());
+        emit(LoginSuccessState(userData: data));
       },
     );
   }

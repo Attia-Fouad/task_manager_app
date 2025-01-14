@@ -21,7 +21,7 @@ class AuthRepoImpl implements AuthRepo {
           "password": password,
         },
       );
-      if (response.data['success']) {
+      if (response.statusCode == 200) {
         return right(UserDataModel.fromJson(response.data));
       }
     } catch (error) {
