@@ -10,7 +10,7 @@ final sl = GetIt.instance;
 class ServicesLocator {
   void init() {
     // cubits
-    sl.registerFactory(() => AppCubit());
+    sl.registerFactory(() => AppCubit(authRepo: sl<AuthRepo>()));
 
     sl.registerFactory(() => LoginCubit(
           authRepo: sl<AuthRepo>(),

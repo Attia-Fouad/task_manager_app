@@ -110,7 +110,7 @@ class LoginScreen extends StatelessWidget {
                                 // check if the state is LoginSuccessState
                                 if (state is LoginSuccessState) {
                                   // save the token in the secure cache and set isLongedIn to true
-                                  saveToken(token: state.userData.accessToken);
+                                  saveToken(token: state.userData.accessToken!);
                                   // save the user data in the app cubit
                                   AppCubit.get(context).userData =
                                       state.userData;

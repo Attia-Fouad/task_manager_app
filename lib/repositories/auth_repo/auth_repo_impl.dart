@@ -34,4 +34,25 @@ class AuthRepoImpl implements AuthRepo {
     }
     return left(ServerFailure(''));
   }
+
+  @override
+  Future<Either<Failure, UserDataModel>> getCurrentUserData() async {
+    try {
+      var response = await DioHelper.getData(
+        url: ApiConstants.currentUserData,
+        sendToken: true,
+      );
+      if (response.statusCode == 200) {
+        return right(UserDataModel.fromJson(response.data));
+      }
+    } catch (error) {
+      if (error is DioException) {
+        return left(ServerFailure.fromDioError(error));
+      }
+      if (kDebugMode) {
+        print("Error when getCurrentUserData $error");
+      }
+    }
+    return left(ServerFailure(''));
+  }
 }

@@ -23,7 +23,13 @@ class _AppLayoutScreenState extends State<AppLayoutScreen> {
       },
       builder: (context, state) {
         return Scaffold(
-          body: SizedBox(child: Text('app layout'),), /*Stack(
+          body: Center(
+            child: SizedBox(child: ElevatedButton(
+              onPressed: (){
+                cubit.getRemoteUserData();
+              },
+                child: Text('app layout')),),
+          ), /*Stack(
             alignment: AlignmentDirectional.bottomCenter,
             children: [
               LazyLoadIndexedStack(

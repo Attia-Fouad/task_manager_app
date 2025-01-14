@@ -6,8 +6,8 @@ class UserDataModel {
   final String lastName;
   final String gender;
   final String image;
-  final String accessToken;
-  final String refreshToken;
+  final String? accessToken;
+  final String? refreshToken;
 
   UserDataModel({
     required this.id,
