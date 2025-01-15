@@ -30,7 +30,7 @@ class ReadMoreWidget extends StatelessWidget {
       child: ReadMoreText(
         text,
         trimMode: TrimMode.Line,
-        trimLines: 2,
+        trimLines: 3,
         trimCollapsedText: moreText ?? AppStrings.showMore,
         trimExpandedText: lessText ?? AppStrings.showLess,
         style: style ?? MyTextStyles.textStyle12Medium,

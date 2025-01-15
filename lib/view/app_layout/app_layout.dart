@@ -15,18 +15,15 @@ class _AppLayoutScreenState extends State<AppLayoutScreen> {
   @override
   initState() {
     cubit=AppCubit.get(context);
+    if(cubit.userData==null){
+      cubit.getRemoteUserData();
+    }
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) async {
-      },
-      builder: (context, state) {
-        return const TasksScreen();
-      },
-    );
+    return const TasksScreen();
   }
 }
 

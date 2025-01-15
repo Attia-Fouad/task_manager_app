@@ -7,6 +7,7 @@ import '../../../../core/constants.dart';
 import '../../../../core/styles/app_colors.dart';
 import '../../cubit/tasks_cubit.dart';
 import '../no_tasks_widget.dart';
+import '../user_data_section.dart';
 
 class TasksMobileLayout extends StatelessWidget {
   const TasksMobileLayout({
@@ -31,7 +32,12 @@ class TasksMobileLayout extends StatelessWidget {
               physics: const AlwaysScrollableScrollPhysics(
                   parent: BouncingScrollPhysics()),
               slivers: [
-                const SliverGap(100),
+                const SliverGap(80),
+                // User Data Section
+                const UserDataSection(),
+                const SliverGap(20),
+                //_________________________________________
+                // Tasks Section
                 // loading when tasks are null until fetching data
                 if (cubit.tasksModel == null)
                   const TasksMobileShimmerListWidget()
