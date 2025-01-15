@@ -12,6 +12,6 @@ abstract class AuthRepo {
 
   Future<Either<Failure, UserDataModel>> getCurrentUserData();
 
-  Future<Either<Failure, RefreshAuthSessionModel>> refreshAuthSession();
+  Future<Either<Failure, RefreshAuthSessionModel>> refreshAuthSession({required String? refreshToken});
 
 }

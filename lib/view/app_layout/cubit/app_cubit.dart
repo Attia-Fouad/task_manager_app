@@ -7,6 +7,8 @@ import 'package:task_manager_app/models/refresh_auth_session_model.dart';
 import 'package:task_manager_app/models/user_data_model.dart';
 import 'package:task_manager_app/repositories/auth_repo/auth_repo.dart';
 
+import '../../../core/constants.dart';
+
 part 'app_state.dart';
 
 class AppCubit extends Cubit<AppStates> {
@@ -50,7 +52,7 @@ class AppCubit extends Cubit<AppStates> {
 
   refreshSession() async {
     emit(RefreshSessionLoadingState());
-    var result = await authRepo.refreshAuthSession();
+    var result = await authRepo.refreshAuthSession(refreshToken: await getRefreshToken());
     result.fold(
       (failure) {
         emit(RefreshSessionFailureState(message: failure.message));
