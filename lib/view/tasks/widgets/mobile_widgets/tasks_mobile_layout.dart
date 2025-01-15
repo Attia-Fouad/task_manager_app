@@ -29,6 +29,7 @@ class TasksMobileLayout extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: appPadding),
             child: CustomScrollView(
+              controller: cubit.scrollController,
               physics: const AlwaysScrollableScrollPhysics(
                   parent: BouncingScrollPhysics()),
               slivers: [
