@@ -72,9 +72,12 @@ dependencies:
   lottie: ^3.2.0
   # sqflite for local database
   sqflite: ^2.4.1
-
+  # to show show text with read more
   readmore: ^3.0.0
+  # to show the device preview for adaptive design
   device_preview: ^1.2.0
+  # mockito for testing
+  mockito: ^5.4.4
 
 dev_dependencies:
   flutter_test:
@@ -86,6 +89,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^4.0.0
+  # build_runner for generating code
+  build_runner: ^2.4.13
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
