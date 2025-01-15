@@ -1,8 +1,12 @@
+import 'package:sqflite/sqflite.dart';
+
 import 'networks/local/cache_helper.dart';
 import 'networks/local/secure_cache_helper.dart';
 
 late bool isLoggedIn;
 const double appPadding = 16.0;
+
+late Database database;
 
 Future<String?> getToken() async {
   return await SecureCacheHelper.getData(key: 'token');

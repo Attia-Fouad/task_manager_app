@@ -10,10 +10,10 @@ import 'core/bloc_helper/my_bloc_observer.dart';
 import 'core/constants.dart';
 import 'core/networks/local/cache_helper.dart';
 import 'core/networks/local/secure_cache_helper.dart';
+import 'core/networks/local/tasks_data_base.dart';
 import 'core/networks/remote/dio_helper.dart';
 import 'core/services/services_locator.dart';
 import 'core/styles/themes.dart';
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +21,8 @@ Future<void> main() async {
   DioHelper.init();
   // initialize Cache Helper
   CacheHelper.init();
+  // initialize sqflite data base
+  database=await TaskDatabase().database;
   // initialize Services Locator
   ServicesLocator().init();
   // initialize locObserver
@@ -28,13 +30,11 @@ Future<void> main() async {
   // Use Future.wait to wait for all the futures to complete
   await Future.wait(futures);
   runApp(
-
-
-      DevicePreview(
-        enabled: !kReleaseMode,
-        builder: (context) => const MyApp(), // Wrap your app
-      ),
-      );
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => const MyApp(), // Wrap your app
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

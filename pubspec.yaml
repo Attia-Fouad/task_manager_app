@@ -70,6 +70,9 @@ dependencies:
   flutter_onboarding_slider: ^1.0.11
   # lottie for animations
   lottie: ^3.2.0
+  # sqflite for local database
+  sqflite: ^2.4.1
+
   readmore: ^3.0.0
   device_preview: ^1.2.0
 

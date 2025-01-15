@@ -44,8 +44,6 @@ class UserDataModel {
     data['lastName'] = lastName;
     data['gender'] = gender;
     data['image'] = image;
-    data['accessToken'] = accessToken;
-    data['refreshToken'] = refreshToken;
     return data;
   }
 
