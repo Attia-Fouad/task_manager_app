@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:task_manager_app/core/app_router/routes.dart';
+import 'package:task_manager_app/core/constants.dart';
 import 'package:task_manager_app/core/shared_components.dart';
 import 'package:task_manager_app/view/app_layout/cubit/app_cubit.dart';
 import 'package:task_manager_app/view/reusable_widgets/adabtive_layout.dart';
@@ -32,6 +35,12 @@ class TasksScreen extends StatelessWidget {
             if (state is GetUserDataFailureState) {
               // show error message
               showToast(state: ToastStates.ERROR, text: state.message);
+
+              if (state.message == "Token Expired!") {
+                removeToken();
+                // navigate to login screen
+                GoRouter.of(context).go(AppRouter.loginScreen);
+              }
             }
           },
           builder: (context, state) {

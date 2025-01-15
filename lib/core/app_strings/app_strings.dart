@@ -9,6 +9,11 @@ abstract class AppStrings {
   static const password = 'Password';
   static const showMore = ' Show More';
   static const showLess = ' Show Less';
+  static const logOut = 'Log Out';
+  static const done = 'Done';
+  static const yes = 'Yes';
+  static const no = 'No';
+  static const areYouSureYouWantToLogOut = 'Are you sure you want to log out?';
   static const pleaseEnterYourPassword = 'Please Enter Your Password';
   static const pleaseEnterYourUserName = 'Please Enter Your User Name';
   static const dontHaveToDoYet = "You don't have a to do list yet!";
