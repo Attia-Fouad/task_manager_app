@@ -48,4 +48,17 @@ class UserDataModel {
     data['refreshToken'] = refreshToken;
     return data;
   }
+
+  List<Object?> get props => [
+    id,
+    username,
+    email,
+    firstName,
+    lastName,
+    gender,
+    image,
+    accessToken,
+    refreshToken,
+  ];
+
 }

@@ -1,10 +1,12 @@
-class TaskModel {
+import 'package:equatable/equatable.dart';
+
+class TaskModel extends Equatable {
   final int id;
   final String todo;
-  final bool completed;
+   bool completed;
   final int userId;
 
-  TaskModel(
+   TaskModel(
       {required this.id,
       required this.todo,
       required this.completed,
@@ -27,4 +29,12 @@ class TaskModel {
     data['userId'] = userId;
     return data;
   }
+
+  @override
+  List<Object?> get props => [
+        id,
+        todo,
+        completed,
+        userId,
+      ];
 }

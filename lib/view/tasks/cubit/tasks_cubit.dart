@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task_manager_app/models/task_model.dart';
 import 'package:task_manager_app/repositories/tasks_repo/remote_tasks_repo.dart';
 
 import '../../../models/tasks_model.dart';
@@ -12,13 +13,31 @@ class TasksCubit extends Cubit<TasksState> {
 
   static TasksCubit get(context) => BlocProvider.of(context);
 
+   editTask({required TaskModel task}) async {
+    // change the task status to the opposite
+    task.completed = !task.completed;
+    emit(EditTaskLoadingState());
+    var result = await remoteTasksRepo.updateTasks(task: task);
+    result.fold((l) {
+      // rollback the changes if it  failed
+      task.completed = !task.completed;
+      emit(EditTaskFailureState(message: l.message));
+    }, (r) {
+      emit(EditTaskSuccessState());
+    });
+  }
 
-
-
-
-
-
-
+   deleteTask({required TaskModel task}) async {
+    // change the task status to the opposite
+    emit(EditTaskLoadingState());
+    var result = await remoteTasksRepo.deleteTasks(task: task);
+    result.fold((l) {
+      emit(EditTaskFailureState(message: l.message));
+    }, (r) {
+      tasksModel!.todos.remove(task);
+      emit(EditTaskSuccessState());
+    });
+  }
 
   //______________________________________________________________________________
   // for scrolling pagination
@@ -40,12 +59,12 @@ class TasksCubit extends Cubit<TasksState> {
   int limit = 15;
   bool gettingMoreTasks = false;
 
-  Future<void> getRemoteTasks({
+   getRemoteTasks({
     bool isFirstTime = true,
     required num? userId,
   }) async {
     // to prevent getting tasks if the userId is null
-    if (userId==null) return;
+    if (userId == null) return;
 
     // to prevent multiple requests
     if (gettingMoreTasks) return;
@@ -72,7 +91,6 @@ class TasksCubit extends Cubit<TasksState> {
     );
     // handle the result
     result.fold((failure) {
-
       // if there's an error, set the gettingMoreTasks to false and emit the failure state
       gettingMoreTasks = false;
       emit(GetTasksFailureState(message: failure.message));
