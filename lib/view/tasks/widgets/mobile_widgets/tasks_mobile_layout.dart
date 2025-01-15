@@ -61,7 +61,8 @@ class TasksMobileLayout extends StatelessWidget {
                     tasks: cubit.tasksModel!.todos,
                   )
                 // if there are no tasks
-                else
+                else if (cubit.tasksModel != null &&
+                    cubit.tasksModel!.todos.isEmpty)
                   const NoTasksWidget(),
                 const SliverGap(20),
               ],
