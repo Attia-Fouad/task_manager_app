@@ -8,14 +8,26 @@ Future<String?> getToken() async {
   return await SecureCacheHelper.getData(key: 'token');
 }
 
+Future<String?> getRefreshToken() async {
+  return await SecureCacheHelper.getData(key: 'refreshToken');
+}
+
 Future<void> saveToken({required String token}) async {
   await SecureCacheHelper.saveData(key: 'token', value: token);
   await checkLoginStatus();
 }
 
+Future<void> saveRefreshToken({required String token}) async {
+  await SecureCacheHelper.saveData(key: 'refreshToken', value: token);
+}
+
 Future<void> removeToken() async {
   await SecureCacheHelper.removeData(key: 'token');
   await checkLoginStatus();
+}
+
+Future<void> removeRefreshToken() async {
+  await SecureCacheHelper.removeData(key: 'refreshToken');
 }
 
 Future<void> checkLoginStatus() async {

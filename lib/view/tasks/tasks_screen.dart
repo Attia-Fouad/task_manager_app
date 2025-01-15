@@ -22,8 +22,10 @@ class TasksScreen extends StatelessWidget {
         child: BlocConsumer<AppCubit, AppStates>(
           buildWhen: (previous, current) =>
               current is GetUserDataSuccessState ||
-              current is GetUserDataFailureState,
-          listener: (context, state) {
+              current is GetUserDataFailureState ||
+              current is RefreshSessionFailureState ||
+              current is RefreshSessionSuccessState,
+          listener: (context, state) async {
             if (state is GetUserDataSuccessState) {
               // get tasks after getting user data
               TasksCubit.get(context)
@@ -33,15 +35,28 @@ class TasksScreen extends StatelessWidget {
                   userId: AppCubit.get(context).userData!.id);
             }
             if (state is GetUserDataFailureState) {
-              // show error message
-              showToast(state: ToastStates.ERROR, text: state.message);
-
               if (state.message == "Token Expired!") {
-                removeToken();
-                // navigate to login screen
-                GoRouter.of(context).go(AppRouter.loginScreen);
+                // refresh session if token expired
+                AppCubit.get(context).refreshSession();
+              }else{
+                // show error message
+                showToast(state: ToastStates.ERROR, text: state.message);
               }
             }
+
+            if(state is RefreshSessionSuccessState){
+             await saveToken(token: state.data.accessToken);
+             await saveRefreshToken(token: state.data.refreshToken);
+             AppCubit.get(context).getRemoteUserData();
+            }
+            if(state is RefreshSessionFailureState){
+              showToast(state: ToastStates.ERROR, text: state.message);
+              removeToken();
+              removeRefreshToken();
+              GoRouter.of(context).go(AppRouter.loginScreen);
+            }
+
+
           },
           builder: (context, state) {
             return AdaptiveLayout(

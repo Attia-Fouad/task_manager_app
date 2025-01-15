@@ -34,6 +34,7 @@ class UserInfoRowWidget extends StatelessWidget {
         const Gap(10),
         InkWell(onTap: () {
           removeToken();
+          removeRefreshToken();
           GoRouter.of(context).go(AppRouter.loginScreen);
         }, child: SvgPicture.asset(Assets.svgsLogout,
         color: AppColors.primaryColor,))

@@ -20,3 +20,18 @@ class GetUserDataFailureState extends AppStates {
 
   GetUserDataFailureState({required this.message});
 }
+
+
+class RefreshSessionLoadingState extends AppStates {}
+
+class RefreshSessionSuccessState extends AppStates {
+  final RefreshAuthSessionModel data;
+
+  RefreshSessionSuccessState({required this.data});
+}
+
+class RefreshSessionFailureState extends AppStates {
+  final String message;
+
+  RefreshSessionFailureState({required this.message});
+}

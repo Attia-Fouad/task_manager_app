@@ -1,9 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import '../../core/constants.dart';
 import '../../core/networks/failures.dart';
 import '../../core/networks/remote/api_constants.dart';
 import '../../core/networks/remote/dio_helper.dart';
+import '../../models/refresh_auth_session_model.dart';
 import '../../models/user_data_model.dart';
 import 'auth_repo.dart';
 
@@ -51,6 +53,27 @@ class AuthRepoImpl implements AuthRepo {
       }
       if (kDebugMode) {
         print("Error when getCurrentUserData $error");
+      }
+    }
+    return left(ServerFailure(''));
+  }
+
+  @override
+  Future<Either<Failure, RefreshAuthSessionModel>> refreshAuthSession() async {
+    try {
+      var response =
+          await DioHelper.postData(url: ApiConstants.refreshAuthSession, data: {
+        "refreshToken": await getRefreshToken(),
+      });
+      if (response.statusCode == 200) {
+        return right(RefreshAuthSessionModel.fromJson(response.data));
+      }
+    } catch (error) {
+      if (error is DioException) {
+        return left(ServerFailure.fromDioError(error));
+      }
+      if (kDebugMode) {
+        print("Error when refreshAuthSession $error");
       }
     }
     return left(ServerFailure(''));
