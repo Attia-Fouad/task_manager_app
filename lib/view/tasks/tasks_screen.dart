@@ -18,7 +18,7 @@ class TasksScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocProvider(
-        create: (context) => sl<TasksCubit>(),
+        create: (context) => sl<TasksCubit>()..getRemoteTasks(userId: AppCubit.get(context).userData?.id),
         child: BlocConsumer<AppCubit, AppStates>(
           buildWhen: (previous, current) =>
               current is GetUserDataSuccessState ||
@@ -27,7 +27,7 @@ class TasksScreen extends StatelessWidget {
             if (state is GetUserDataSuccessState) {
               // get tasks after getting user data
               TasksCubit.get(context)
-                  .getRemoteTasks(userId: AppCubit.get(context).userData!.id);
+                  .getRemoteTasks(userId: AppCubit.get(context).userData?.id);
               // start scrolling listener for scrolling pagination
               TasksCubit.get(context).startScrollingListener(
                   userId: AppCubit.get(context).userData!.id);

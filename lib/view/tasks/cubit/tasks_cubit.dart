@@ -40,8 +40,11 @@ class TasksCubit extends Cubit<TasksState> {
 
   Future<void> getRemoteTasks({
     bool isFirstTime = true,
-    required num userId,
+    required num? userId,
   }) async {
+    // to prevent getting tasks if the userId is null
+    if (userId==null) return;
+
     // to prevent multiple requests
     if (gettingMoreTasks) return;
 
