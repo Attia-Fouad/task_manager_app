@@ -10,13 +10,15 @@ import '../../models/user_data_model.dart';
 import 'auth_repo.dart';
 
 class AuthRepoImpl implements AuthRepo {
+  final DioHelper dioHelper;
+  AuthRepoImpl({required this.dioHelper});
   @override
   Future<Either<Failure, UserDataModel>> login({
     required String username,
     required String password,
   }) async {
     try {
-      var response = await DioHelper.postData(
+      var response = await dioHelper.postData(
         url: ApiConstants.login,
         data: {
           "username": username,
@@ -40,7 +42,7 @@ class AuthRepoImpl implements AuthRepo {
   @override
   Future<Either<Failure, UserDataModel>> getCurrentUserData() async {
     try {
-      var response = await DioHelper.getData(
+      var response = await dioHelper.getData(
         url: ApiConstants.currentUserData,
         sendToken: true,
       );
@@ -62,7 +64,7 @@ class AuthRepoImpl implements AuthRepo {
   Future<Either<Failure, RefreshAuthSessionModel>> refreshAuthSession() async {
     try {
       var response =
-          await DioHelper.postData(url: ApiConstants.refreshAuthSession, data: {
+          await dioHelper.postData(url: ApiConstants.refreshAuthSession, data: {
         "refreshToken": await getRefreshToken(),
       });
       if (response.statusCode == 200) {

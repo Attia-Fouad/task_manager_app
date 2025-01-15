@@ -9,6 +9,9 @@ import '../../models/tasks_model.dart';
 import 'remote_tasks_repo.dart';
 
 class RemoteTasksRepoImpl implements RemoteTasksRepo {
+  final DioHelper dioHelper;
+  RemoteTasksRepoImpl({required this.dioHelper});
+
   @override
   Future<Either<Failure, TasksModel>> getAllUserTasks({
     required num userId,
@@ -16,7 +19,7 @@ class RemoteTasksRepoImpl implements RemoteTasksRepo {
     int? skip,
   }) async {
     try {
-      var response = await DioHelper.getData(
+      var response = await dioHelper.getData(
         url: ApiConstants.getAllUserTasks(userId: userId),
         query: {
           if (limit != null) "limit": limit,
@@ -42,7 +45,7 @@ class RemoteTasksRepoImpl implements RemoteTasksRepo {
     required TaskModel task,
   }) async {
     try {
-      var response = await DioHelper.patchData(
+      var response = await dioHelper.patchData(
           url: ApiConstants.task(taskId: task.id),
           data: {
             "completed": task.completed,
@@ -66,7 +69,7 @@ class RemoteTasksRepoImpl implements RemoteTasksRepo {
     required TaskModel task,
   }) async {
     try {
-      var response = await DioHelper.deleteData(
+      var response = await dioHelper.deleteData(
         url: ApiConstants.task(taskId: task.id),
       );
       if (response.statusCode == 200) {
@@ -87,7 +90,7 @@ class RemoteTasksRepoImpl implements RemoteTasksRepo {
   Future<Either<Failure, TaskModel>> addNewTasks(
       {required String taskTitle, required num userId}) async {
     try {
-      var response = await DioHelper.postData(url: ApiConstants.addTask, data: {
+      var response = await dioHelper.postData(url: ApiConstants.addTask, data: {
         "todo": taskTitle,
         "userId": userId,
         "completed": false,

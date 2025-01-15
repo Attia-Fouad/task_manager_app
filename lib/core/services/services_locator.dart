@@ -1,4 +1,6 @@
 import 'package:get_it/get_it.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:task_manager_app/core/networks/remote/dio_helper.dart';
 import 'package:task_manager_app/view/tasks/cubit/tasks_cubit.dart';
 
 import '../../repositories/auth_repo/auth_repo.dart';
@@ -26,9 +28,14 @@ class ServicesLocator {
         ));
 
     //Repository
-    sl.registerLazySingleton<AuthRepo>(() => AuthRepoImpl());
-    sl.registerLazySingleton<RemoteTasksRepo>(() => RemoteTasksRepoImpl());
+    sl.registerLazySingleton<AuthRepo>(() => AuthRepoImpl(dioHelper: sl<DioHelper>()));
+    sl.registerLazySingleton<RemoteTasksRepo>(() => RemoteTasksRepoImpl(dioHelper: sl<DioHelper>()));
     sl.registerLazySingleton<LocalTasksRepo>(
-        () => LocalTasksRepoImpl(db: database));
+        () => LocalTasksRepoImpl(db: sl<Database>()));
+
+
+    // dependencies
+    sl.registerLazySingleton<DioHelper>(() => DioHelper());
+    sl.registerLazySingleton<Database>(() => database);
   }
 }

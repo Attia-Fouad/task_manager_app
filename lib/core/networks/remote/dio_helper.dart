@@ -1,10 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../../constants.dart';
-import '../local/cache_helper.dart';
 import 'api_constants.dart';
-import 'dart:ui' as ui;
 
 class DioHelper {
   static late Dio dio;
@@ -26,7 +23,7 @@ class DioHelper {
         maxWidth: 90));
   }
 
-  static getData({
+   getData({
     required String url,
     String? lang,
     query,
@@ -45,7 +42,7 @@ class DioHelper {
     );
   }
 
-  static postData({
+   postData({
     required String url,
     String? lang,
     query,
@@ -64,7 +61,7 @@ class DioHelper {
     );
   }
 
-  static patchData({
+   patchData({
     required String url,
     query,
     data,
@@ -81,7 +78,7 @@ class DioHelper {
     );
   }
 
-  static deleteData({
+   deleteData({
     required String url,
     String? lang,
     query,
@@ -99,7 +96,7 @@ class DioHelper {
     );
   }
 
-  static putData({
+   putData({
     required String url,
     String? lang,
     query,
