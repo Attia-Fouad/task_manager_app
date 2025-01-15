@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import '../../core/networks/failures.dart';
 import '../../core/networks/remote/api_constants.dart';
 import '../../core/networks/remote/dio_helper.dart';
+import '../../models/task_model.dart';
 import '../../models/tasks_model.dart';
 import 'remote_tasks_repo.dart';
 
@@ -31,6 +32,52 @@ class RemoteTasksRepoImpl implements RemoteTasksRepo {
       }
       if (kDebugMode) {
         print("Error when getAllUserTasks $error");
+      }
+    }
+    return left(ServerFailure(''));
+  }
+
+  @override
+  Future<Either<Failure, void>> updateTasks({
+    required TaskModel task,
+  }) async {
+    try {
+      var response = await DioHelper.patchData(
+          url: ApiConstants.task(taskId: task.id),
+          data: {
+            "completed": task.completed,
+          });
+      if (response.statusCode == 200) {
+        return right(null);
+      }
+    } catch (error) {
+      if (error is DioException) {
+        return left(ServerFailure.fromDioError(error));
+      }
+      if (kDebugMode) {
+        print("Error when updateTasks $error");
+      }
+    }
+    return left(ServerFailure(''));
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteTasks({
+    required TaskModel task,
+  }) async {
+    try {
+      var response = await DioHelper.deleteData(
+          url: ApiConstants.task(taskId: task.id),
+         );
+      if (response.statusCode == 200) {
+        return right(null);
+      }
+    } catch (error) {
+      if (error is DioException) {
+        return left(ServerFailure.fromDioError(error));
+      }
+      if (kDebugMode) {
+        print("Error when updateTasks $error");
       }
     }
     return left(ServerFailure(''));
