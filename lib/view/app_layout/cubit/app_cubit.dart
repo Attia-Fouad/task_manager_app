@@ -15,18 +15,6 @@ class AppCubit extends Cubit<AppStates> {
 
   UserDataModel? userData;
 
-  int currentIndex = 0;
-  List<Widget> userScreens = [
-    // const UserHomeScreen(),
-    // const UserCalculatorScreen(),
-    // const UserProfileScreen(),
-  ];
-
-  void changeBottomNavBar(int index, context) {
-    currentIndex = index;
-    emit(AppChangeBottomNavState());
-  }
-
   getRemoteUserData() async {
     emit(GetUserDataLoadingState());
     var result = await authRepo.getCurrentUserData();

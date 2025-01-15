@@ -13,6 +13,11 @@ abstract class AppStrings {
   static const done = 'Done';
   static const yes = 'Yes';
   static const no = 'No';
+  static const addNewTask = 'Add New Task';
+  static const details = 'Details..';
+  static const add = 'Add';
+  static const cancel = 'Cancel';
+  static const pleaseEnterTaskDetails = 'Please Enter Task Details';
   static const areYouSureYouWantToLogOut = 'Are you sure you want to log out?';
   static const pleaseEnterYourPassword = 'Please Enter Your Password';
   static const pleaseEnterYourUserName = 'Please Enter Your User Name';

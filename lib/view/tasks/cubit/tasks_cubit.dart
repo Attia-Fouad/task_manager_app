@@ -13,7 +13,19 @@ class TasksCubit extends Cubit<TasksState> {
 
   static TasksCubit get(context) => BlocProvider.of(context);
 
-   editTask({required TaskModel task}) async {
+  addNewTask({required String taskTitle, required num userId}) async {
+    emit(AddNewTaskLoadingState());
+    var result =
+        await remoteTasksRepo.addNewTasks(userId: userId, taskTitle: taskTitle);
+    result.fold((l) {
+      emit(AddNewTaskFailureState(message: l.message));
+    }, (r) {
+      tasksModel?.todos.add(r);
+      emit(AddNewTaskSuccessState());
+    });
+  }
+
+  editTask({required TaskModel task}) async {
     // change the task status to the opposite
     task.completed = !task.completed;
     emit(EditTaskLoadingState());
@@ -27,7 +39,7 @@ class TasksCubit extends Cubit<TasksState> {
     });
   }
 
-   deleteTask({required TaskModel task}) async {
+  deleteTask({required TaskModel task}) async {
     // change the task status to the opposite
     emit(EditTaskLoadingState());
     var result = await remoteTasksRepo.deleteTasks(task: task);
@@ -59,7 +71,7 @@ class TasksCubit extends Cubit<TasksState> {
   int limit = 15;
   bool gettingMoreTasks = false;
 
-   getRemoteTasks({
+  getRemoteTasks({
     bool isFirstTime = true,
     required num? userId,
   }) async {

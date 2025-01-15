@@ -4,11 +4,10 @@ import '../../core/networks/failures.dart';
 import '../../models/tasks_model.dart';
 
 abstract class RemoteTasksRepo {
-
   Future<Either<Failure, TasksModel>> getAllUserTasks({
     required num userId,
-     int? limit,
-     int? skip,
+    int? limit,
+    int? skip,
   });
 
   Future<Either<Failure, void>> updateTasks({
@@ -19,4 +18,5 @@ abstract class RemoteTasksRepo {
     required TaskModel task,
   });
 
+  Future<Either<Failure, TaskModel>> addNewTasks({required String taskTitle,required num userId});
 }

@@ -67,8 +67,8 @@ class RemoteTasksRepoImpl implements RemoteTasksRepo {
   }) async {
     try {
       var response = await DioHelper.deleteData(
-          url: ApiConstants.task(taskId: task.id),
-         );
+        url: ApiConstants.task(taskId: task.id),
+      );
       if (response.statusCode == 200) {
         return right(null);
       }
@@ -78,6 +78,29 @@ class RemoteTasksRepoImpl implements RemoteTasksRepo {
       }
       if (kDebugMode) {
         print("Error when updateTasks $error");
+      }
+    }
+    return left(ServerFailure(''));
+  }
+
+  @override
+  Future<Either<Failure, TaskModel>> addNewTasks(
+      {required String taskTitle, required num userId}) async {
+    try {
+      var response = await DioHelper.postData(url: ApiConstants.addTask, data: {
+        "todo": taskTitle,
+        "userId": userId,
+        "completed": false,
+      });
+      if (response.statusCode == 201) {
+        return right(TaskModel.fromJson(response.data));
+      }
+    } catch (error) {
+      if (error is DioException) {
+        return left(ServerFailure.fromDioError(error));
+      }
+      if (kDebugMode) {
+        print("Error when addNewTasks $error");
       }
     }
     return left(ServerFailure(''));
