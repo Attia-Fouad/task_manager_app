@@ -22,19 +22,25 @@ Future<void> main() async {
   // initialize Cache Helper
   CacheHelper.init();
   // initialize sqflite data base
-  database=await TaskDatabase().database;
+  database = await TaskDatabase().database;
   // initialize Services Locator
   ServicesLocator().init();
   // initialize locObserver
   Bloc.observer = MyBlocObserver();
   // Use Future.wait to wait for all the futures to complete
   await Future.wait(futures);
+
   runApp(
+    const MyApp(),
+  );
+
+  // uncomment to use device preview for testing adaptive design
+  /*runApp(
     DevicePreview(
       enabled: !kReleaseMode,
       builder: (context) => const MyApp(), // Wrap your app
     ),
-  );
+  );*/
 }
 
 class MyApp extends StatelessWidget {
