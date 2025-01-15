@@ -11,31 +11,20 @@ class AppLayoutScreen extends StatefulWidget {
 }
 
 class _AppLayoutScreenState extends State<AppLayoutScreen> {
+ late AppCubit cubit;
   @override
   initState() {
+    cubit=AppCubit.get(context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    var cubit = AppCubit.get(context);
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) async {
       },
       builder: (context, state) {
-        return Scaffold(
-          body: TasksScreen(), /*Stack(
-            alignment: AlignmentDirectional.bottomCenter,
-            children: [
-              LazyLoadIndexedStack(
-                index: cubit.currentIndex,
-                children:
-                    cubit.isSeller ? cubit.sellerScreens : cubit.userScreens,
-              ),
-              CustomNavBarWidget(cubit: cubit),
-            ],
-          ),*/
-        );
+        return const TasksScreen();
       },
     );
   }

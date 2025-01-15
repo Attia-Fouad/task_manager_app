@@ -12,6 +12,13 @@ class TasksCubit extends Cubit<TasksState> {
 
   static TasksCubit get(context) => BlocProvider.of(context);
 
+
+
+
+
+
+
+  //______________________________________________________________________________
   // for scrolling pagination
   var scrollController = ScrollController();
 
@@ -28,7 +35,7 @@ class TasksCubit extends Cubit<TasksState> {
   TasksModel? tasksModel;
 
   int skip = 0;
-  int limit = 10;
+  int limit = 15;
   bool gettingMoreTasks = false;
 
   Future<void> getRemoteTasks({

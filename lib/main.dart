@@ -44,20 +44,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => sl<AppCubit>(),
-      child: BlocBuilder<AppCubit, AppStates>(
-        builder: (context, states) {
-          return ScreenUtilInit(
-            designSize: const Size(
-              375,
-              812,
-            ),
-            builder: (context, child) {
-              return MaterialApp.router(
-                routerConfig: AppRouter.router,
-                debugShowCheckedModeBanner: false,
-                theme: lightTheme,
-              );
-            },
+      child: ScreenUtilInit(
+        designSize: const Size(
+          375,
+          812,
+        ),
+        builder: (context, child) {
+          return MaterialApp.router(
+            routerConfig: AppRouter.router,
+            debugShowCheckedModeBanner: false,
+            theme: lightTheme,
           );
         },
       ),
