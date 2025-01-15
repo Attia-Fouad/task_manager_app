@@ -84,7 +84,8 @@ class LoginScreen extends StatelessWidget {
                                     ),
                                     validator: (String? value) {
                                       if (value!.isEmpty) {
-                                        return AppStrings.pleaseEnterYourPassword;
+                                        return AppStrings
+                                            .pleaseEnterYourPassword;
                                       }
                                     },
                                     function: () {
@@ -111,19 +112,28 @@ class LoginScreen extends StatelessWidget {
                                   // check if the state is LoginSuccessState
                                   if (state is LoginSuccessState) {
                                     // save the token in the secure cache and set isLongedIn to true
-                                    saveToken(token: state.userData.accessToken!);
+                                    saveToken(
+                                        token: state.userData.accessToken!);
                                     // save the refresh token in the secure cache
-                                    saveRefreshToken(token: state.userData.refreshToken!);
+                                    saveRefreshToken(
+                                        token: state.userData.refreshToken!);
                                     // save the user data in the app cubit
                                     AppCubit.get(context).userData =
                                         state.userData;
+                                    // save the user data in the local cache
+                                    await AppCubit.get(context)
+                                        .saveUserDataLocal(
+                                            userData: state.userData);
+
                                     // navigate to the home screen
-                                    GoRouter.of(context).go(AppRouter.appLayout);
+                                    GoRouter.of(context)
+                                        .go(AppRouter.appLayout);
                                   }
                                 },
                                 builder: (context, state) {
                                   return DefaultButton(
-                                    loadingController: state is LoginLoadingState,
+                                    loadingController:
+                                        state is LoginLoadingState,
                                     text: AppStrings.login,
                                     onTap: () {
                                       if (cubit.formKey.currentState!

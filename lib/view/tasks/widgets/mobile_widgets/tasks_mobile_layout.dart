@@ -30,8 +30,7 @@ class TasksMobileLayout extends StatelessWidget {
         if (state is AddNewTaskFailureState) {
           showToast(state: ToastStates.ERROR, text: state.message);
         }
-        if (state is AddNewTaskLoadingState) {
-        }
+        if (state is AddNewTaskLoadingState) {}
       },
       builder: (context, state) {
         return RefreshIndicator(

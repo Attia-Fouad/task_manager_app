@@ -22,7 +22,7 @@ class TaskModel extends Equatable {
     );
   }
 
-  Map<String, dynamic> toJson({bool saveLocal = false}) {
+  Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['todo'] = todo;
