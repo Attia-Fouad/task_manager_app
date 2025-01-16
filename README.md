@@ -78,3 +78,21 @@ Unit tests were written using the mockito and bloc_test, with mock responses use
 Conclusion
 
 This project demonstrates proficiency in Flutter development, state management, data persistence, and writing unit tests. Feel free to reach out if you have any questions or need further clarifications.
+
+<p align="center">
+      <img src="https://github.com/user-attachments/assets/12e7b51b-898d-4f5d-9461-3bf84cdee729" width="30%" />
+  <img src="https://github.com/user-attachments/assets/25a3395a-943e-40e6-8024-793e1a5ed231" width="30%" />
+
+  <img src="https://github.com/user-attachments/assets/659d5d9f-a613-4ccd-b8ce-2f4030b50285" width="30%" />
+</p>
+
+<p align="center">
+      <img src="https://github.com/user-attachments/assets/c3a11e8b-a8c3-44b5-8b51-54991be76657" width="30%" />
+  <img src="https://github.com/user-attachments/assets/8135cd6b-e417-43ed-9f70-e45548ac54a6" width="30%" />
+
+  <img src="https://github.com/user-attachments/assets/25081dcd-50aa-470d-8761-7206a5d70de6" width="30%" />
+</p>
+
+
+
+
