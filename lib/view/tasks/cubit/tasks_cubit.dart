@@ -72,7 +72,7 @@ class TasksCubit extends Cubit<TasksState> {
     result.fold((l) {
       emit(EditTaskFailureState(message: l.message));
     }, (r) {
-      tasksModel!.todos.remove(task);
+      tasksModel?.todos.remove(task);
       emit(EditTaskSuccessState());
     });
   }
