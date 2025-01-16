@@ -1,5 +1,4 @@
-import 'package:device_preview/device_preview.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,10 +18,10 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // initialize dio helper
   DioHelper.init();
-  // initialize Cache Helper
-  CacheHelper.init();
   // initialize sqflite data base
   database = await TaskDatabase().database;
+  // initialize Cache Helper
+  await CacheHelper.init();
   // initialize Services Locator
   ServicesLocator().init();
   // initialize locObserver

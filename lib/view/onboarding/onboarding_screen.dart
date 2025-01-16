@@ -7,6 +7,7 @@ import '../../core/app_router/routes.dart';
 import '../../core/app_strings/app_strings.dart';
 import '../../core/constants.dart';
 import '../../core/networks/local/cache_helper.dart';
+import '../../core/services/services_locator.dart';
 import '../../core/styles/app_colors.dart';
 import '../../core/styles/text_styles.dart';
 import '../../core/values_manager.dart';
@@ -39,7 +40,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           MyTextStyles.textStyle18Medium.copyWith(color: Colors.white),
       onFinish: () {
         // Save the first time to the cache to avoid showing the onboarding screen again
-        CacheHelper.saveData(key: 'isFirstTime', value: true);
+        sl<CacheHelper>().saveData(key: 'isFirstTime', value: true);
         // Check if the user is logged in or not
         if (isLoggedIn) {
           GoRouter.of(context).go(AppRouter.appLayout);

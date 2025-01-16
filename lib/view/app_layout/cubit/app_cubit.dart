@@ -12,9 +12,10 @@ import '../../../core/constants.dart';
 part 'app_state.dart';
 
 class AppCubit extends Cubit<AppStates> {
-  AppCubit({required this.authRepo}) : super(AppInitial());
+  AppCubit({required this.authRepo, required this.cacheHelper}) : super(AppInitial());
 
   final AuthRepo authRepo;
+  final CacheHelper cacheHelper;
 
   static AppCubit get(context) => BlocProvider.of(context);
 
@@ -22,13 +23,13 @@ class AppCubit extends Cubit<AppStates> {
 
   saveUserDataLocal({required UserDataModel userData}) async {
     // save user data locally using shared preferences
-    await CacheHelper.saveData(
+    await cacheHelper.saveData(
         key: "userData", value: jsonEncode(userData.toJson()));
   }
 
   getLocalUserData() async {
     // get user data from shared preferences
-    String stringUserData = await CacheHelper.getData(
+    String stringUserData = await cacheHelper.getData(
       key: "userData",
     );
     userData = UserDataModel.fromJson(jsonDecode(stringUserData));
@@ -50,9 +51,9 @@ class AppCubit extends Cubit<AppStates> {
     );
   }
 
-  refreshSession() async {
+  refreshSession({required String? refreshToken}) async {
     emit(RefreshSessionLoadingState());
-    var result = await authRepo.refreshAuthSession(refreshToken: await getRefreshToken());
+    var result = await authRepo.refreshAuthSession(refreshToken: refreshToken);
     result.fold(
       (failure) {
         emit(RefreshSessionFailureState(message: failure.message));

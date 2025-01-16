@@ -43,7 +43,7 @@ class TasksScreen extends StatelessWidget {
                 if (state is GetUserDataFailureState) {
                   if (state.message == "Token Expired!") {
                     // refresh session if token expired
-                    appCubit.refreshSession();
+                    appCubit.refreshSession(refreshToken: await getRefreshToken());
                   } else {
                     // show error message
                     showToast(state: ToastStates.ERROR, text: state.message);

@@ -12,13 +12,14 @@ import '../../repositories/tasks_repo/remote_tasks_repo_impl.dart';
 import '../../view/app_layout/cubit/app_cubit.dart';
 import '../../view/login/cubit/login_cubit.dart';
 import '../constants.dart';
+import '../networks/local/cache_helper.dart';
 
 final sl = GetIt.instance;
 
 class ServicesLocator {
   void init() {
     // cubits
-    sl.registerFactory(() => AppCubit(authRepo: sl<AuthRepo>()));
+    sl.registerFactory(() => AppCubit(authRepo: sl<AuthRepo>(),cacheHelper: sl<CacheHelper>()));
     sl.registerFactory(() => LoginCubit(
           authRepo: sl<AuthRepo>(),
         ));
@@ -36,6 +37,7 @@ class ServicesLocator {
 
     // dependencies
     sl.registerLazySingleton<DioHelper>(() => DioHelper());
+    sl.registerLazySingleton<CacheHelper>(() => CacheHelper());
     sl.registerLazySingleton<Database>(() => database);
   }
 }

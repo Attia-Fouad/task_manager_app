@@ -1,4 +1,5 @@
 import 'package:sqflite/sqflite.dart';
+import 'package:task_manager_app/core/services/services_locator.dart';
 
 import 'networks/local/cache_helper.dart';
 import 'networks/local/secure_cache_helper.dart';
@@ -39,7 +40,7 @@ Future<void> checkLoginStatus() async {
 }
 
 Future<bool> checkIsFirstTime() async {
-  return await CacheHelper.getData(key: 'isFirstTime') == null ? true : false;
+  return await sl<CacheHelper>().getData(key: 'isFirstTime') == null ? true : false;
 }
 
 String capitalizeFirstLetter(String text) {
